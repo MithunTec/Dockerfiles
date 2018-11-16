@@ -1,0 +1,14 @@
+FROM openjdk:8-jre
+RUN echo "Tomcat Container Creatation"
+RUN apt-get update && \
+   apt-get install -y wget
+
+RUN wget http://download.jboss.org/wildfly/14.0.1.Final/wildfly-14.0.1.Final.tar.gz
+
+RUN tar -zxvf wildfly-14.0.1.Final.tar.gz
+
+ADD http://mirrors.jenkins.io/war-stable/latest/jenkins.war /wildfly-14.0.1.Final/standalone/deployments
+
+EXPOSE 8080
+
+CMD [ "/wildfly-14.0.1.Final/bin/standalone.sh"]

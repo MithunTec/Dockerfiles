@@ -1,0 +1,14 @@
+FROM openjdk:8-jre
+RUN echo "Tomcat Container Creatation"
+RUN apt-get update && \
+   apt-get install -y wget
+
+RUN wget http://mirrors.wuchna.com/apachemirror/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+
+RUN tar -zxvf apache-tomcat-8.5.35.tar.gz
+
+ADD http://mirrors.jenkins.io/war-stable/latest/jenkins.war /apache-tomcat-8.5.35/webapps
+
+EXPOSE 8080
+
+CMD [ "/apache-tomcat-8.5.35/bin/catalina.sh", "run" ]
